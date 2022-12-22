@@ -84,3 +84,60 @@ console.log(strangeSums([42, 3, -1, -42]));      // 1
 console.log(strangeSums([-5, 5]));               // 1
 console.log(strangeSums([19, 6, -3, -20]));      // 0
 console.log(strangeSums([9]));                   // 0
+console.log("");
+function twoDimensionalSum(arr){
+  let sum = 0;
+  for (let i = 0; i < arr.length; i++){
+    for (let j = 0; j < arr[i].length; j++) {
+      sum += (arr[i][j]);
+    }
+  }
+  return sum;
+}
+
+let arr1 = [
+  [1, 3],
+  [-4, 7, 10],
+  [2]
+];
+console.log(twoDimensionalSum(arr1)); // 19
+
+let arr2 = [
+  [],
+  [3, 1, 2],
+];
+console.log(twoDimensionalSum(arr2)); // 6
+
+function twoDimensionalProduct(arr){
+  let product = 1;
+  for (let i = 0; i < arr.length; i++){
+    for (let j = 0; j < arr[i].length; j++) {
+      product *= (arr[i][j]);
+    }
+  }
+  return product;
+}
+
+arr1 = [
+  [6, 4],
+  [5],
+  [3, 1]
+];
+console.log(twoDimensionalProduct(arr1)); // 360
+
+arr2 = [
+  [11, 4],
+  [2]
+];
+console.log(twoDimensionalProduct(arr2)); // 88
+
+function maxInMatrix(matrix) {
+
+}
+
+
+matrix = [[11,  2,-99],
+          [20, 19, 10],
+          [47, 72, 56]]
+
+console.log(maxInMatrix(matrix)); // 72
