@@ -35,6 +35,25 @@ console.log(pairsMaker(['Rosemary', 'Alex', 'Connor'])); // =>
 //   [ 'Rosemary', 'Connor' ],
 //   [ 'Alex', 'Connor' ] ]
 
+
+function chunk(array, size) {
+  const chunkedArray = [];
+
+  for (let element of array) {
+    let last = chunkedArray[chunkedArray.length - 1];
+
+    if (!last || last.length === size) {
+      chunkedArray.push(element);
+    } else {
+      last.push(element);
+    }
+  }
+  return chunkedArray;
+}
+
+console.log(chunk([1,2,3,4],2));
+console.log(chunk([1,2,3,4,5],2));
+
 function twoSum(arr, num) {
   for (let i = 0; i < arr.length; i++) {
     for (let j = i + 1; j < arr.length; j++){
@@ -268,7 +287,7 @@ matrixG = [[ 5, 10,  8,  6],
 console.log(luckyNumbers(matrixG)); // [10]
 console.log("");
 
-//TODO - 2-d arrays -  spiral matrix, pyramid array, pascals triangle
+//TODO - 2-d arrays -  pascals triangle
 function spiralOrder(m) {
   let rows = m.length,  cols = m[0].length;
   let top = 0; bottom = rows - 1, left = 0, right = cols - 1;
@@ -297,7 +316,7 @@ function spiralOrder(m) {
       --bottom;
       dir++;
     }
-    else if (dir == 4) { //moving bottom-up
+    else if (dir == 4) { //moving right-left
         for (i = bottom; i >= top; --i) {
           newArr.push(m[i][left]);
       }
@@ -319,3 +338,73 @@ matrixI = [[1, 2, 3, 4],
 
 
 console.log(spiralOrder(matrixI)); // [1,2,3,4,8,12,11,10,9,5,6,7]
+
+matrixJ = [[1,2,3,4,5,6],
+           [7,8,9,10,11,12],
+           [13,14,15,16,17,18],
+           [19,20,21,22,23,24],
+           [25,26,27,28,29,30],
+           [31,32,33,34,35,36]]
+
+console.log(spiralOrder(matrixJ));
+
+function pyramidArray(base){
+  let pyramid = [base];
+  while (pyramid.length < base.length) {
+    let next = adjacentSums(pyramid[0]);
+    pyramid.unshift(next);
+  }
+  return pyramid;
+}
+
+function adjacentSums(arr){
+  let sums = [];
+  for (let i = 0; i < arr.length - 1; i++) {
+    let sum = arr[i] + arr[i+1];
+    sums.push(sum);
+  }
+  return sums;
+}
+
+
+let p1 = pyramidArray([2, 3, 7, 5, 9]);
+console.log(p1);
+// [
+//   [ 85 ],
+//   [ 37, 48 ],
+//   [ 15, 22, 26 ],
+//   [ 5, 10, 12, 14 ],
+//   [ 2, 3, 7, 5, 9 ]
+// ]
+
+let p2 = pyramidArray([2, 2, 2, 2]);
+console.log(p2);
+// [
+//   [ 16 ],
+//   [ 8, 8 ],
+//   [ 4, 4, 4 ],
+//   [ 2, 2, 2, 2 ]
+// ]
+
+function pascalsTriangle(num) {
+  return 0;
+}
+console.log(pascalsTriangle(5));
+// [
+//     [1],
+//     [1, 1],
+//     [1, 2, 1],
+//     [1, 3, 3, 1],
+//     [1, 4, 6, 4, 1]
+// ]
+
+console.log(pascalsTriangle(7));
+// [
+//     [1],
+//     [1, 1],
+//     [1, 2, 1],
+//     [1, 3, 3, 1],
+//     [1, 4, 6, 4, 1],
+//     [1, 5, 10, 10, 5, 1],
+//     [1, 6, 15, 20, 15, 6, 1]
+// ]
