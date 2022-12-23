@@ -226,6 +226,7 @@ console.log(matrixAddition(matrixA, matrixB)); // [[11, 6], [7, 7]]
 console.log(matrixAddition(matrixA, matrixC)); // [[1, 5], [4, 6]]
 console.log(matrixAddition(matrixB, matrixC)); // [[8, 1], [3, -1]]
 console.log(matrixAddition(matrixD, matrixE)); // [[2, -5], [19, 14], [6, 4]]
+console.log("");
 
 function matrixAddition(m1, m2) {
   let sum = [];
@@ -239,17 +240,21 @@ function matrixAddition(m1, m2) {
   return sum;
 }
 
-function luckyNumbers(m){
-  let curMin = Infinity;
-  for (let row = 0; row < m.length; row++) {
-    for (let col = 0; col < m[0].length; col++){
-      if (m[row][col] < curMin) {
-        curMin = m[row][col];
-      }
-    }
+// magic num is min in row and max in col
+function luckyNumbers(matrix) {
+  let minRow = [], maxCol = [];
+
+  for (let i in matrix){minRow.push(Math.min.apply(null, matrix[i]))}
+
+  for (let i in matrix[0]) {
+    let max = 0;
+    for (let j in matrix){ if (matrix[j][i] > max) max = matrix[j][i]}
+
+    maxCol.push(max)
   }
-  return curMin
+  return minRow.filter(n => maxCol.includes(n));
 }
+
 matrixF = [[ 5,  9, 21],
           [ 9, 19,  6],
           [12, 14, 15]]
@@ -261,3 +266,56 @@ matrixG = [[ 5, 10,  8,  6],
           [21, 15, 19, 10]]
 
 console.log(luckyNumbers(matrixG)); // [10]
+console.log("");
+
+//TODO - 2-d arrays -  spiral matrix, pyramid array, pascals triangle
+function spiralOrder(m) {
+  let rows = m.length,  cols = m[0].length;
+  let top = 0; bottom = rows - 1, left = 0, right = cols - 1;
+  let dir = 1;
+  let newArr = [];
+
+  while (top <= bottom && left <= right) {
+    if (dir == 1) { // moving left -> right
+      for (let i = left; i <= right; i++) {
+        newArr.push(m[top][i]);
+      }
+      top++;
+      dir++;
+    }
+    else if (dir == 2) { // moving top -> bottom
+      for (i = top; i <= bottom; i++) {
+        newArr.push(m[i][right]);
+      }
+      --right;
+      dir++;
+    }
+    else if (dir == 3) { // moving bottom->up
+      for (i = right; i >= left; --i) {
+        newArr.push(m[bottom][i]);
+      }
+      --bottom;
+      dir++;
+    }
+    else if (dir == 4) { //moving bottom-up
+        for (i = bottom; i >= top; --i) {
+          newArr.push(m[i][left]);
+      }
+      left++;
+      dir = 1;
+    }
+  }
+  return newArr;
+}
+matrixH = [[ 1, 2, 3],
+          [ 4, 5, 6],
+          [ 7, 8, 9]]
+
+console.log(spiralOrder(matrixH)); // [1,2,3,6,9,8,7,4,5]
+
+matrixI = [[1, 2, 3, 4],
+          [5, 6, 7, 8],
+          [9,10,11,12]]
+
+
+console.log(spiralOrder(matrixI)); // [1,2,3,4,8,12,11,10,9,5,6,7]
