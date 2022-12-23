@@ -132,7 +132,16 @@ arr2 = [
 console.log(twoDimensionalProduct(arr2)); // 88
 
 function maxInMatrix(matrix) {
+  let max = 0;
 
+  for (let i = 0; i < matrix.length; i++) {
+    for (let j = 0; j < matrix[i].length; j++) {
+      if (matrix[i][j] >= max) {
+        max = matrix[i][j];
+      }
+    }
+  }
+  return max;
 }
 
 
@@ -141,3 +150,114 @@ matrix = [[11,  2,-99],
           [47, 72, 56]]
 
 console.log(maxInMatrix(matrix)); // 72
+
+function maxColumn(matrix) {
+  const height = matrix.length;
+  const width = matrix[0].length;
+
+  const maxColumns = [];
+  for (let col = 0; col < width; col++) {
+    let colMax = matrix[0][col];
+    for (let row = 1; row < height; row++) {
+      if (matrix[row][col] > colMax) {
+        colMax = matrix[row][col];
+      }
+    }
+    maxColumns.push(colMax);
+  }
+  return maxColumns
+}
+
+
+matrix = [[ 5,  9, 21],
+          [ 9, 19,  6],
+          [12, 14, 15]]
+
+console.log(maxColumn(matrix)); // [12, 19, 21]
+
+function zip(arr1, arr2) {
+  let arr = [];
+  for (let i = 0; i < arr1.length; i++){
+    arr.push(arr1[i],arr2[i]);
+  }
+  return arr;
+}
+console.log(zip([1, 2, 3, 4], ['eins', 'zwei', 'drei', 'vier']));
+// [ [ 1, 'eins' ], [ 2, 'zwei' ], [ 3, 'drei' ], [ 4, 'vier' ] ]
+
+console.log(zip(['eins', 'zwei', 'drei'], [1, 2, 3]));
+// [ [ 'eins', 1 ], [ 'zwei', 2 ], [ 'drei', 3 ] ]
+
+console.log(zip(['alef', 'bet'], ['alpha', 'beta']));
+// [ [ 'alef', 'alpha' ], [ 'bet', 'beta' ] ]
+
+function zanyZip(arr1, arr2){
+  let zipped = [];
+  for (let i = 0; i < arr1.length || i < arr2.length; i++){
+    let el1 = arr1[i];
+    let el2 = arr2[i];
+    if (el1 === undefined) {
+      el1 = null;
+    }
+    if (el2 === undefined) {
+      el2 = null;
+    }
+    zipped.push([el1, el2]);
+  }
+  return zipped;
+}
+console.log(zanyZip([1, 2], ['eins', 'zwei', 'drei', 'vier']));
+// [ [ 1, 'eins' ], [ 2, 'zwei' ], [ null, 'drei' ], [ null, 'vier' ] ]
+
+console.log(zanyZip([1, 2, 3, 4], ['eins', 'zwei', 'drei']));
+// [ [ 1, 'eins' ], [ 2, 'zwei' ], [ 3, 'drei' ], [ 4, null ] ]
+
+console.log(zanyZip(['alef', 'bet'], ['alpha', 'beta']));
+// [ [ 'alef', 'alpha' ], [ 'bet', 'beta' ] ]
+
+
+let matrixA = [[2,5], [4,7]]
+let matrixB = [[9,1], [3,0]]
+let matrixC = [[-1,0], [0,-1]]
+let matrixD = [[2, -5], [7, 10], [0, 1]]
+let matrixE = [[0 , 0], [12, 4], [6,  3]]
+
+console.log(matrixAddition(matrixA, matrixB)); // [[11, 6], [7, 7]]
+console.log(matrixAddition(matrixA, matrixC)); // [[1, 5], [4, 6]]
+console.log(matrixAddition(matrixB, matrixC)); // [[8, 1], [3, -1]]
+console.log(matrixAddition(matrixD, matrixE)); // [[2, -5], [19, 14], [6, 4]]
+
+function matrixAddition(m1, m2) {
+  let sum = [];
+  for (let row = 0; row < m1.length; row++) {
+    let subArray = [];
+    for (let col = 0; col < m1[0].length; col++) {
+      subArray.push(m1[row][col] + m2[row][col]);
+    }
+    sum.push(subArray);
+  }
+  return sum;
+}
+
+function luckyNumbers(m){
+  let curMin = Infinity;
+  for (let row = 0; row < m.length; row++) {
+    for (let col = 0; col < m[0].length; col++){
+      if (m[row][col] < curMin) {
+        curMin = m[row][col];
+      }
+    }
+  }
+  return curMin
+}
+matrixF = [[ 5,  9, 21],
+          [ 9, 19,  6],
+          [12, 14, 15]]
+
+console.log(luckyNumbers(matrixF)); // [12]
+
+matrixG = [[ 5, 10,  8,  6],
+          [10,  2,  7,  9],
+          [21, 15, 19, 10]]
+
+console.log(luckyNumbers(matrixG)); // [10]
