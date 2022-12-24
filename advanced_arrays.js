@@ -36,23 +36,6 @@ console.log(pairsMaker(['Rosemary', 'Alex', 'Connor'])); // =>
 //   [ 'Alex', 'Connor' ] ]
 
 
-function chunk(array, size) {
-  const chunkedArray = [];
-
-  for (let element of array) {
-    let last = chunkedArray[chunkedArray.length - 1];
-
-    if (!last || last.length === size) {
-      chunkedArray.push(element);
-    } else {
-      last.push(element);
-    }
-  }
-  return chunkedArray;
-}
-
-console.log(chunk([1,2,3,4],2));
-console.log(chunk([1,2,3,4,5],2));
 
 function twoSum(arr, num) {
   for (let i = 0; i < arr.length; i++) {
@@ -369,26 +352,24 @@ function adjacentSums(arr){
 
 let p1 = pyramidArray([2, 3, 7, 5, 9]);
 console.log(p1);
-// [
-//   [ 85 ],
-//   [ 37, 48 ],
-//   [ 15, 22, 26 ],
-//   [ 5, 10, 12, 14 ],
-//   [ 2, 3, 7, 5, 9 ]
-// ]
 
 let p2 = pyramidArray([2, 2, 2, 2]);
 console.log(p2);
-// [
-//   [ 16 ],
-//   [ 8, 8 ],
-//   [ 4, 4, 4 ],
-//   [ 2, 2, 2, 2 ]
-// ]
 
-function pascalsTriangle(num) {
-  return 0;
+function pascalsTriangle(height) {
+  let triangle = [[1]];
+  while (triangle.length < height) {
+    let last = triangle[triangle.length - 1];
+    let next = [1];
+    for (let i = 0; i < last.length - 1; i++) {
+      next.push(last[i] + last[i + 1]);
+    }
+    next.push(1);
+    triangle.push(next);
+  }
+  return triangle;
 }
+console.log(adjacentSums(1));
 console.log(pascalsTriangle(5));
 // [
 //     [1],
