@@ -1,0 +1,13 @@
+2-d arrays; 
+	matrix addition 
+	lucky numbers 
+	spiral matrix 
+	pyramid array 
+	pascals triangle 
+
+recall: 
+	uncompress 
+	hipsterfy 
+	repeating translate 
+
+
