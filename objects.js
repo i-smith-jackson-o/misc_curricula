@@ -86,3 +86,57 @@ console.log(catBuilder("Whiskers", "black", ["scratching-post", "yarn"]));
 
 console.log(catBuilder("Nyan", "rainbow", ["poptarts"]));
 // prints: { name: 'Nyan', color: 'rainbow', toys: [ 'poptarts' ] }
+
+// References vs. Primitives
+// five primitive types
+// 1. boolean
+// 2. null
+// undefined
+// number
+// string
+// primitive types are immutable
+// reference values are mutable.
+// when you assign a reference value from one variable to a second,
+// the value stored in the first variable is also copied into the location
+// of the second variable
+// three reference types: arr, object, function
+
+let cat1 = {name: 'apples', breed: 'tabby'};
+let cat2 = cat1;
+cat1.name = "Lucy";
+console.log(cat1); // {name: "Lucy", breed: "tabby"}
+console.log(cat2); // {name: "Lucy", breed: "tabby"}
+
+//spread operator and rest parameter syntax
+function adder(num1, ...otherNums) {
+  console.log("The first number is: " + num1);
+  let sum = num1;
+
+  // captures all other arguments into an array and adds them to our sum
+  otherNums.forEach(n => sum += n);
+
+  console.log("The sum is: " + sum);
+  return 0;
+}
+console.log(adder(2,3,4));
+
+// spreading elements
+let numArray = [1,2,3];
+let moreNums = [...numArray, 4, 5, 6];
+console.log(moreNums);
+
+let colors = {red: "scarlet", blue: "aquamarine"};
+let newColors = {...colors};
+console.log(newColors);
+
+let colors2 = {green: "forest", yellow: "sunflower"};
+let moreColors = {...colors, ...colors2};
+console.log(moreColors);
+
+function speak(verb, noun) {
+  return "I like to go " + verb + " with " + noun + ".";
+}
+
+const words = ['running','jet'];
+console.log(speak('running', 'jet'));
+console.log(speak(...words));
